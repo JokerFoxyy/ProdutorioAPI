@@ -1,6 +1,5 @@
-const express = require('express');
-const app = express();
-const port = 3000;
+var express = require("express");
+var router = express.Router();
 
 function produtorio(m, n, recursive = false) {
   if (recursive) {
@@ -17,14 +16,14 @@ function produtorio(m, n, recursive = false) {
   }
 }
 
-app.get('/produtorio/:m/:n/:recursive?', (req, res) => {
+router.get('/:m/:n/:recursive?', (req, res) => {
   const m = parseInt(req.params.m);
   const n = parseInt(req.params.n);
   const recursive = req.params.recursive === 'true';
   const result = produtorio(m, n, recursive);
-  res.json({ result });
+  res.json({
+    result
+  });
 });
 
-app.listen(port, () => {
-  console.log(`API running at http://localhost:${port}`);
-});
+module.exports = router;
